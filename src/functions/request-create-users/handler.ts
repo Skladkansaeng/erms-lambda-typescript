@@ -38,7 +38,7 @@ const createUser: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 
   return formatJSONResponse({
-    message: uuid,
+    message: input,
   });
 };
 

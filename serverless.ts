@@ -4,21 +4,22 @@ import type { AWS } from '@serverless/typescript';
 // import hello from '@functions';
 // import test from '@functions';
 const serverlessConfiguration: AWS = {
-  service: 'pull-erms-master',
-  frameworkVersion: '3',
-  plugins: ['serverless-esbuild'],
+  service: "poc-erms-api",
+  frameworkVersion: "3",
+  plugins: ["serverless-esbuild"],
   provider: {
-    name: 'aws',
-    runtime: 'nodejs16.x',
-    region : 'ap-southeast-1',
+    name: "aws",
+    runtime: "nodejs16.x",
+    region: "ap-southeast-1",
     apiGateway: {
       minimumCompressionSize: 1024,
-      shouldStartNameWithService: true
+      shouldStartNameWithService: true,
     },
     environment: {
-      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
-    }
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+      NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
+      IS_ONLINE: "true",
+    },
   },
   // import the function via paths
   functions: { ...indy() },
@@ -28,10 +29,10 @@ const serverlessConfiguration: AWS = {
       bundle: true,
       minify: false,
       sourcemap: false,
-      exclude: ['aws-sdk'],
-      target: 'node16',
-      define: { 'require.resolve': undefined },
-      platform: 'node'
+      exclude: ["aws-sdk"],
+      target: "node16",
+      define: { "require.resolve": undefined },
+      platform: "node",
       // concurrency: 10,
     },
   },
