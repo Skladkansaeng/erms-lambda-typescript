@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "username": "mp_phetpayuk_b",
+    "email": "phetpayuk@gmail.com",
+    "millID": "0261",
+    "defaultLanguage": "th",
+    "permission": "buyer",
+    "requester": "punnaruj.sak@easyrice.ai",
+    "selectProduct": "mp",
+    "maStartDate": "2023-01-14t03:48:58+07:00",
+    "product": { "models": ["nfavor_ml_1", "dy_gk79_1"] }
+  }
+}
