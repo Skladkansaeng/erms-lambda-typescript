@@ -1,6 +1,6 @@
 import { TABLE_REQUEST_CREATE_USER } from "@configs/user-approve-flow";
 import { createDynamoDBClient } from "@libs/dynamo-client";
-import { ErrorCode } from "../models/enum";
+import { ErrorCode, Status } from "../models/enum";
 import { InputCreateDto } from "../models/input.dto";
 
 export class CreateUserServices {
@@ -18,7 +18,7 @@ export class CreateUserServices {
     };
 
     const value = await docClient.query(paramsQuery).promise();
-    if (value.Count) {
+    if (value.Count && value.Items?.pop().status !== Status.REJECT) {
       throw ErrorCode.USERNAME_EXITS;
     }
 

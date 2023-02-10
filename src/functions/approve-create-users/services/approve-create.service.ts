@@ -32,9 +32,14 @@ export class ApproveCreateServices {
     const value = await docClient.query(paramsQuery as any).promise();
 
     if (value.Count) {
-      const [item] = value.Items;
-      let subId;
+      const [item] = value.Items.filter(
+        ({ status }) => status === Status.PENDING
+      );
+      if (!item) {
+        throw ErrorCode.NOT_FOUND;
+      }
 
+      let subId;
       if (input.status === Status.APPROVE) {
         try {
           const { data } = await axios.post(
@@ -51,7 +56,13 @@ export class ApproveCreateServices {
       await docClient
         .put({
           TableName: TABLE_REQUEST_CREATE_USER,
-          Item: { ...item, status: input.status, subId },
+          Item: {
+            ...item,
+            status: input.status,
+            subId,
+            approveBy: input.approveBy,
+            reason: input.reason,
+          },
         })
         .promise();
 

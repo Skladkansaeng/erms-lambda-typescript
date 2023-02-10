@@ -13,10 +13,19 @@ export class InputApproveDto {
   @IsEnum(Status)
   status: string;
 
+  @IsString()
+  approveBy: string;
+
+  @IsString()
+  @IsOptional()
+  reason: string;
+
   constructor(input: InputApproveDto) {
-    const { uuid, username, status } = input;
+    const { uuid, username, status, approveBy, reason } = input;
     this.uuid = uuid;
     this.username = username;
     this.status = status;
+    this.approveBy = approveBy;
+    this.reason = reason;
   }
 }
