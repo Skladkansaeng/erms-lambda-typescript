@@ -3,11 +3,11 @@ import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 import schema from "./schema";
 import { v4 as uuidv4 } from "uuid";
-import { InputCreateDto } from "./models/input.dto";
+import { InputRequestPackageDto } from "./models/input.dto";
+import { Status } from "@functions/request-create-users/models/enum";
 import { validate } from "class-validator";
-import { Status } from "./models/enum";
-import { CreateUserServices } from "./services/create-user.service";
-import { ExceptionMapService } from "./services/exception-map.service";
+import { ExceptionMapService } from "@functions/request-create-users/services/exception-map.service";
+import { RequestPackageService } from "./services/request-package.service";
 import { HttpStatusCode } from "axios";
 import { CustomError } from "@models/custom-error";
 
@@ -16,35 +16,34 @@ const createUser: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
 ) => {
   const { body } = event;
   const uuid = uuidv4();
+
   const rawInput = {
     uuid,
     status: Status.PENDING,
     createdDate: new Date().toISOString(),
     ...body,
   };
-  const input = new InputCreateDto(rawInput as any);
+
+  const input = new InputRequestPackageDto(rawInput as any);
   const errors = await validate(input);
 
   if (errors.length) {
     return new ExceptionMapService().mapping(
-      HttpStatusCode.NotFound,
+      HttpStatusCode.BadRequest,
       errors.map(({ constraints }) => constraints)
     );
   }
 
-  const createUserService = new CreateUserServices();
   try {
-    await createUserService.createUser(input);
-  } catch (errorCode) {
-    if (errorCode instanceof CustomError)
-      return new ExceptionMapService().mapping(
-        errorCode.statusCode,
-        errorCode.errors
-      );
+    const requestPackageService = new RequestPackageService();
+    await requestPackageService.create(input);
+  } catch (error) {
+    if (error instanceof CustomError)
+      return new ExceptionMapService().mapping(error.statusCode, error.errors);
   }
 
   return formatJSONResponse({
-    message: input,
+    message: {},
   });
 };
 

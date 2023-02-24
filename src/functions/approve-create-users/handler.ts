@@ -1,8 +1,9 @@
-import { ErrorCode } from "@functions/request-create-users/models/enum";
-import { ExceptionMapServince } from "@functions/request-create-users/services/exception-map.service";
+import { ExceptionMapService } from "@functions/request-create-users/services/exception-map.service";
 import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/api-gateway";
 import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
+import { CustomError } from "@models/custom-error";
+import { HttpStatusCode } from "axios";
 import { validate } from "class-validator";
 import { InputApproveDto } from "./models/input.dto";
 import schema from "./schema";
@@ -16,18 +17,17 @@ const approveCreate: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   const errors = await validate(input);
 
   if (errors.length) {
-    return new ExceptionMapServince().mapping(
-      ErrorCode.BAD_REQUEST,
+    return new ExceptionMapService().mapping(
+      HttpStatusCode.BadRequest,
       errors.map(({ constraints }) => constraints)
     );
   }
 
   try {
     await new ApproveCreateServices().approveCreate(input);
-  } catch (errorCode) {
-    return new ExceptionMapServince().mapping(errorCode, [
-      { error: "username or uuid doe't exits." },
-    ]);
+  } catch (error) {
+    if (error instanceof CustomError)
+      return new ExceptionMapService().mapping(error.statusCode, error.errors);
   }
 
   return formatJSONResponse({

@@ -1,0 +1,13 @@
+{
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "username": "string",
+    "packageUuid": "package-uuid-1",
+    "requester": "string",
+    "startDate": "2023-02-14T09:10:27.063Z",
+    "expireDate": "2023-02-14T09:10:27.063Z",
+    "maxUsage": 750
+  }
+}

@@ -1,17 +1,14 @@
 import { formatJSONResponse } from "@libs/api-gateway";
-import { ErrorCode } from "../models/enum";
+import { HttpStatusCode } from "axios";
 
-export class ExceptionMapServince {
+export class ExceptionMapService {
   constructor() {}
 
   mapping(code, data?: object[]) {
     const errors = data ?? [];
 
     switch (code) {
-      case ErrorCode.USERNAME_EXITS:
-        errors.push({ username: "This username already exists." });
-        break;
-      case ErrorCode.SERVER_ERROR:
+      case HttpStatusCode.InternalServerError:
         errors.splice(0, errors.length);
         break;
     }

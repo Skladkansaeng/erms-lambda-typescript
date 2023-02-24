@@ -1,6 +1,8 @@
 import { TABLE_REQUEST_CREATE_USER } from "@configs/user-approve-flow";
 import { createDynamoDBClient } from "@libs/dynamo-client";
-import { ErrorCode, Status } from "../models/enum";
+import { CustomError } from "@models/custom-error";
+import { HttpStatusCode } from "axios";
+import { Status } from "../models/enum";
 import { InputCreateDto } from "../models/input.dto";
 
 export class CreateUserServices {
@@ -19,7 +21,9 @@ export class CreateUserServices {
 
     const value = await docClient.query(paramsQuery).promise();
     if (value.Count && value.Items?.pop().status !== Status.REJECT) {
-      throw ErrorCode.USERNAME_EXITS;
+      throw new CustomError(HttpStatusCode.Conflict, [
+        { username: "This username already exists." },
+      ]);
     }
 
     await docClient

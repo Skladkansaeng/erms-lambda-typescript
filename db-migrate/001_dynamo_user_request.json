@@ -1,142 +1,121 @@
 {
-    "AttributeDefinitions": [
-      {
-        "AttributeName": "uuid",
-        "AttributeType": "S"
-      },
-      {
-        "AttributeName": "status",
-        "AttributeType": "S"
-      },
-      {
-        "AttributeName": "requester",
-        "AttributeType": "S"
-      },
-      {
-        "AttributeName": "createdDate",
-        "AttributeType": "S"
-      },
-      {
-        "AttributeName": "username",
-        "AttributeType": "S"
-      },
-      {
-        "AttributeName": "selectProduct",
-        "AttributeType": "S"
-      }
-    ],
-    "TableName": "user-request",
-    "KeySchema": [
-      {
-        "AttributeName": "uuid",
-        "KeyType": "HASH"
-      }
-    ],
-    "ProvisionedThroughput": {
-      "NumberOfDecreasesToday": 0,
-      "ReadCapacityUnits": 3,
-      "WriteCapacityUnits": 3
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "uuid",
+      "AttributeType": "S"
     },
-    "GlobalSecondaryIndexes": [
-      {
-        "IndexName": "requester",
-        "KeySchema": [
-          {
-            "AttributeName": "requester",
-            "KeyType": "HASH"
-          }
-        ],
-        "Projection": {
-          "ProjectionType": "ALL"
-        },
-        "IndexStatus": "ACTIVE",
-        "ProvisionedThroughput": {
-          "ReadCapacityUnits": 3,
-          "WriteCapacityUnits": 3
-        },
-        "IndexSizeBytes": 536,
-        "ItemCount": 2,
-        "IndexArn": "arn:aws:dynamodb:ddblocal:000000000000:table/user-request/index/requester"
+    {
+      "AttributeName": "status",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "requester",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "createdDate",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "username",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "selectProduct",
+      "AttributeType": "S"
+    }
+  ],
+  "TableName": "user-request",
+  "KeySchema": [
+    {
+      "AttributeName": "uuid",
+      "KeyType": "HASH"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 3,
+    "WriteCapacityUnits": 3
+  },
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "requester",
+      "KeySchema": [
+        {
+          "AttributeName": "requester",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
       },
-      {
-        "IndexName": "createdDate",
-        "KeySchema": [
-          {
-            "AttributeName": "createdDate",
-            "KeyType": "HASH"
-          }
-        ],
-        "Projection": {
-          "ProjectionType": "ALL"
-        },
-        "IndexStatus": "ACTIVE",
-        "ProvisionedThroughput": {
-          "ReadCapacityUnits": 3,
-          "WriteCapacityUnits": 3
-        },
-        "IndexSizeBytes": 0,
-        "ItemCount": 0,
-        "IndexArn": "arn:aws:dynamodb:ddblocal:000000000000:table/user-request/index/createdDate"
-      },
-      {
-        "IndexName": "status",
-        "KeySchema": [
-          {
-            "AttributeName": "status",
-            "KeyType": "HASH"
-          }
-        ],
-        "Projection": {
-          "ProjectionType": "ALL"
-        },
-        "IndexStatus": "ACTIVE",
-        "ProvisionedThroughput": {
-          "ReadCapacityUnits": 3,
-          "WriteCapacityUnits": 3
-        },
-        "IndexSizeBytes": 536,
-        "ItemCount": 2,
-        "IndexArn": "arn:aws:dynamodb:ddblocal:000000000000:table/user-request/index/status"
-      },
-      {
-        "IndexName": "username",
-        "KeySchema": [
-          {
-            "AttributeName": "username",
-            "KeyType": "HASH"
-          }
-        ],
-        "Projection": {
-          "ProjectionType": "ALL"
-        },
-        "IndexStatus": "ACTIVE",
-        "ProvisionedThroughput": {
-          "ReadCapacityUnits": 3,
-          "WriteCapacityUnits": 3
-        },
-        "IndexSizeBytes": 536,
-        "ItemCount": 2,
-        "IndexArn": "arn:aws:dynamodb:ddblocal:000000000000:table/user-request/index/username"
-      },
-      {
-        "IndexName": "selectProduct",
-        "KeySchema": [
-          {
-            "AttributeName": "selectProduct",
-            "KeyType": "HASH"
-          }
-        ],
-        "Projection": {
-          "ProjectionType": "ALL"
-        },
-        "IndexStatus": "ACTIVE",
-        "ProvisionedThroughput": {
-          "ReadCapacityUnits": 3,
-          "WriteCapacityUnits": 3
-        },
-        "IndexSizeBytes": 536,
-        "ItemCount": 2,
-        "IndexArn": "arn:aws:dynamodb:ddblocal:000000000000:table/user-request/index/selectProduct"
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 3,
+        "WriteCapacityUnits": 3
       }
-    ]
-  }
+    },
+    {
+      "IndexName": "createdDate",
+      "KeySchema": [
+        {
+          "AttributeName": "createdDate",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 3,
+        "WriteCapacityUnits": 3
+      }
+    },
+    {
+      "IndexName": "status",
+      "KeySchema": [
+        {
+          "AttributeName": "status",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 3,
+        "WriteCapacityUnits": 3
+      }
+    },
+    {
+      "IndexName": "username",
+      "KeySchema": [
+        {
+          "AttributeName": "username",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 3,
+        "WriteCapacityUnits": 3
+      }
+    },
+    {
+      "IndexName": "selectProduct",
+      "KeySchema": [
+        {
+          "AttributeName": "selectProduct",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 3,
+        "WriteCapacityUnits": 3
+      }
+    }
+  ]
+}

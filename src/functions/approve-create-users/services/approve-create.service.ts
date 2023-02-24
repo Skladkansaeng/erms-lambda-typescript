@@ -1,6 +1,6 @@
-import { ErrorCode, Status } from "@functions/request-create-users/models/enum";
+import { Status } from "@functions/request-create-users/models/enum";
 import { createDynamoDBClient } from "@libs/dynamo-client";
-import axios from "axios";
+import axios, { HttpStatusCode } from "axios";
 import { InputApproveDto } from "../models/input.dto";
 import { ParamsQuery } from "../models/param-query.model";
 import { omit } from "lodash";
@@ -8,6 +8,7 @@ import {
   API_CREATE_USER,
   TABLE_REQUEST_CREATE_USER,
 } from "@configs/user-approve-flow";
+import { CustomError } from "@models/custom-error";
 
 export class ApproveCreateServices {
   async approveCreate(input: InputApproveDto) {
@@ -36,7 +37,7 @@ export class ApproveCreateServices {
         ({ status }) => status === Status.PENDING
       );
       if (!item) {
-        throw ErrorCode.NOT_FOUND;
+        throw HttpStatusCode.NotFound;
       }
 
       let subId;
@@ -49,7 +50,7 @@ export class ApproveCreateServices {
           subId = data.subID;
         } catch (err) {
           console.log(err);
-          throw ErrorCode.SERVER_ERROR;
+          throw HttpStatusCode.InternalServerError;
         }
       }
 
@@ -69,6 +70,6 @@ export class ApproveCreateServices {
       return true;
     }
 
-    throw ErrorCode.NOT_FOUND;
+    throw new CustomError(HttpStatusCode.NotFound);
   }
 }
