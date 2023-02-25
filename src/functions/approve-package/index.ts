@@ -6,8 +6,8 @@ export default {
   events: [
     {
       http: {
-        method: "post",
-        path: "request-user",
+        method: "patch",
+        path: "approve-package-user",
         // request: {
         //   schemas: {
         //     "application/json": schema,

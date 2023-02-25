@@ -1,0 +1,101 @@
+{
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "uuid",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "username",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "requester",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "approveBy",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "status",
+        "AttributeType": "S"
+      }
+    ],
+    "TableName": "user_package_request",
+    "KeySchema": [
+      {
+        "AttributeName": "uuid",
+        "KeyType": "HASH"
+      }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 3,
+      "WriteCapacityUnits": 3
+    },
+    "GlobalSecondaryIndexes": [
+      {
+        "IndexName": "requester",
+        "KeySchema": [
+          {
+            "AttributeName": "requester",
+            "KeyType": "HASH"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 3,
+          "WriteCapacityUnits": 3
+        }
+      },
+      {
+        "IndexName": "approveBy",
+        "KeySchema": [
+          {
+            "AttributeName": "approveBy",
+            "KeyType": "HASH"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 3,
+          "WriteCapacityUnits": 3
+        }
+      },
+      {
+        "IndexName": "username",
+        "KeySchema": [
+          {
+            "AttributeName": "username",
+            "KeyType": "HASH"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 3,
+          "WriteCapacityUnits": 3
+        }
+      },
+      {
+        "IndexName": "status",
+        "KeySchema": [
+          {
+            "AttributeName": "status",
+            "KeyType": "HASH"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 3,
+          "WriteCapacityUnits": 3
+        }
+      }
+    ]
+  }

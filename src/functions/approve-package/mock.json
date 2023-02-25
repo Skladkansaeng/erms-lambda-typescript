@@ -1,0 +1,9 @@
+{
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": {
+        "requestUuid": "05120067-7e41-4ffc-a836-0d3991a4723f",
+        "status": "APPROVE"
+    }
+}

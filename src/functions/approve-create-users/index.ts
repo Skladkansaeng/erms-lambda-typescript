@@ -1,4 +1,4 @@
-import schema from "./schema";
+// import schema from "./schema";
 import { handlerPath } from "@libs/handler-resolver";
 
 export default {
@@ -7,12 +7,12 @@ export default {
     {
       http: {
         method: "put",
-        path: "approve",
-        request: {
-          schemas: {
-            "application/json": schema,
-          },
-        },
+        path: "approve-create-user",
+        // request: {
+        //   schemas: {
+        //     "application/json": schema,
+        //   },
+        // },
       },
     },
   ],

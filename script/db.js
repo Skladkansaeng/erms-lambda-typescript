@@ -12,7 +12,7 @@ const dynamoDB = new AWS.DynamoDB({
     // secretAccessKey: "local",
     // endpoint: "http://localhost:8000",
 });
-const dbSchema = require('../db-migrate/003_dynamo_package.json')
+const dbSchema = require('../db-migrate/004_dynamo_request_package.json')
 if(!stage) {
     throw "stage option is not exits !!";
 }

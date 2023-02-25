@@ -14,6 +14,7 @@ export class InputApproveDto {
   status: string;
 
   @IsString()
+  @IsOptional()
   approveBy: string;
 
   @IsString()
