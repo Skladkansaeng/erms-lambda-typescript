@@ -31,7 +31,7 @@ const approveCreate: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 
   return formatJSONResponse({
-    // message: uuid,
+    message: body,
   });
 };
 

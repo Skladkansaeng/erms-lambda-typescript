@@ -22,7 +22,7 @@ const createUser: ValidatedEventAPIGatewayProxyEvent<any> = async (
       errors.map(({ constraints }) => constraints)
     );
   }
-  
+
   try {
     await new ApprovePackageService().approvePackage(input);
   } catch (error) {
@@ -31,7 +31,7 @@ const createUser: ValidatedEventAPIGatewayProxyEvent<any> = async (
   }
 
   return formatJSONResponse({
-    message: {},
+    message: input,
   });
 };
 
